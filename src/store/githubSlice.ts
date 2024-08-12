@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const url = process.env.REACT_APP_BASE_URL;
-const token = "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";
+const token = process.env.REACT_APP_TOKEN;
 
 export const fetchApi = createAsyncThunk(
   "GitHubApi/fetchApi",
