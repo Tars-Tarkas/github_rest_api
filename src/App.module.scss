@@ -1,0 +1,36 @@
+.text {
+  min-height: 100%;
+  height: calc(100vh - 112px);
+  max-width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+
+  margin: auto 0;
+  &_message {
+    font-family: Roboto;
+    font-size: 46px;
+    font-weight: 400;
+    letter-spacing: 0.17000000178813934px;
+  }
+}
+.table {
+  display: flex;
+  gap: 16px;
+  min-height: 100%;
+  height: calc(100vh - 190px);
+  &_datagrid {
+    padding-top: 24px;
+    padding-left: 32px;
+    width: 960px;
+  }
+  &_caption {
+    font-family: Roboto;
+    font-size: 48px;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+}

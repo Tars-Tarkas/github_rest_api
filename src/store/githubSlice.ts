@@ -1,13 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 const url = process.env.REACT_APP_BASE_URL;
-const token = process.env.REACT_APP_TOKEN;
+const token = process.env.REACT_APP_PERSONAL_TOKEN;
 
 export const fetchApi = createAsyncThunk(
   "GitHubApi/fetchApi",
-  async function (search: string, { rejectWithValue }) {
+  async function (
+    {
+      query,
+      page,
+      per_page,
+    }: { query: string; page: number; per_page: number },
+    { rejectWithValue }
+  ) {
     try {
       const res = await fetch(
-        `https://api.github.com/search/repositories?q=${search}`,
+        `${url}search/repositories?q=${query}&page=${page}&per_page=${per_page}`,
         {
           method: "GET",
           headers: {
@@ -28,8 +36,8 @@ export const fetchApi = createAsyncThunk(
   }
 );
 const initialState = {
-  data: [],
-  loading: false,
+  data: {},
+  isLoading: false,
   error: "",
 };
 
@@ -39,15 +47,15 @@ const githubSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchApi.pending, (state) => {
-      state.loading = true;
+      state.isLoading = true;
       state.error = "";
     });
     builder.addCase(fetchApi.fulfilled, (state, action) => {
       state.data = action.payload;
-      //   state.loading = false;
+      state.isLoading = false;
     });
     builder.addCase(fetchApi.rejected, (state, action) => {
-      //   state.loading = false;
+      state.isLoading = false;
       state.error = action.payload as string;
     });
   },
